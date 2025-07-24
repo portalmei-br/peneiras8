@@ -517,7 +517,7 @@ function displayResults(results) {
     });
 }
 
-// Função para criar card de resultado
+// Função para criar card de resultado - VERSÃO APRIMORADA
 function createResultCard(peneira) {
     const card = document.createElement('div');
     card.className = 'result-card';
@@ -943,5 +943,4 @@ function adjustForDevice() {
 // Chamar na inicialização e no resize
 adjustForDevice();
 window.addEventListener('resize', debounce(adjustForDevice, 250));
-
 
