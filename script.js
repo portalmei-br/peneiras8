@@ -1,4 +1,4 @@
-// Dados simulados de peneiras de futebol - VERSÃO APRIMORADA
+// Dados simulados de peneiras de futebol - VERSÃO REFINADA
 const peneirasData = [
     {
         id: 1,
@@ -13,8 +13,7 @@ const peneirasData = [
         distancia: 2.5,
         lat: -23.9618,
         lng: -46.3322,
-        // NOVOS CAMPOS ADICIONADOS
-        status: "aberta", // "aberta", "encerrada", "em_breve"
+        status: "aberta",
         vagasDisponiveis: 8,
         totalVagas: 50,
         prazoInscricao: "2024-08-10",
@@ -33,7 +32,6 @@ const peneirasData = [
         distancia: 5.8,
         lat: -23.5505,
         lng: -46.6333,
-        // NOVOS CAMPOS ADICIONADOS
         status: "encerrada",
         vagasDisponiveis: 0,
         totalVagas: 40,
@@ -53,7 +51,6 @@ const peneirasData = [
         distancia: 8.2,
         lat: -23.5629,
         lng: -46.6544,
-        // NOVOS CAMPOS ADICIONADOS
         status: "aberta",
         vagasDisponiveis: 3,
         totalVagas: 30,
@@ -73,7 +70,6 @@ const peneirasData = [
         distancia: 12.1,
         lat: -23.5629,
         lng: -46.6544,
-        // NOVOS CAMPOS ADICIONADOS
         status: "aberta",
         vagasDisponiveis: 15,
         totalVagas: 60,
@@ -93,7 +89,6 @@ const peneirasData = [
         distancia: 45.3,
         lat: -22.9519,
         lng: -46.5428,
-        // NOVOS CAMPOS ADICIONADOS
         status: "encerrada",
         vagasDisponiveis: 0,
         totalVagas: 25,
@@ -113,7 +108,6 @@ const peneirasData = [
         distancia: 35.7,
         lat: -22.9056,
         lng: -47.0608,
-        // NOVOS CAMPOS ADICIONADOS
         status: "aberta",
         vagasDisponiveis: 22,
         totalVagas: 35,
@@ -431,7 +425,7 @@ async function handleSearch() {
         // Simular delay de busca
         setTimeout(() => {
             searchPeneiras(address);
-        }, 2500); // Aumentado o tempo para simular uma busca mais "profissional"
+        }, 2500);
 
     } catch (error) {
         showNotification('Erro ao buscar CEP. Tente novamente.', 'error');
@@ -553,7 +547,7 @@ function displayResults(results) {
     });
 }
 
-// FUNÇÃO APRIMORADA PARA CRIAR CARD DE RESULTADO
+// FUNÇÃO REFINADA PARA CRIAR CARD DE RESULTADO - DESIGN PROFISSIONAL
 function createResultCard(peneira) {
     const card = document.createElement('div');
     card.className = 'result-card';
@@ -564,147 +558,139 @@ function createResultCard(peneira) {
         `${Math.round(peneira.distancia * 1000)}m` : 
         `${peneira.distancia}km`;
     
-    // Determinar status da peneira
+    // Determinar status e informações de vagas de forma mais elegante
     const statusInfo = getStatusInfo(peneira);
-    
-    // Determinar escassez de vagas
     const vagasInfo = getVagasInfo(peneira);
-    
-    // Calcular dias restantes para inscrição
-    const diasRestantes = getDiasRestantes(peneira.prazoInscricao);
+    const prazoInfo = getPrazoInfo(peneira);
     
     card.innerHTML = `
-        <div class="result-header">
-            <div>
-                <h3 class="result-title">${peneira.titulo}</h3>
-                <p class="result-club">${peneira.clube}</p>
+        <div class="card-header">
+            <div class="card-title-section">
+                <h3 class="card-title">${peneira.titulo}</h3>
+                <p class="card-club">${peneira.clube}</p>
             </div>
-            <span class="result-distance">${distanciaTexto}</span>
-        </div>
-        
-        ${statusInfo.html}
-        
-        <div class="result-info">
-            <div class="info-item">
-                <i class="fas fa-calendar"></i>
-                <span>${dataFormatada}</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-clock"></i>
-                <span>${peneira.horario}</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>${peneira.endereco}</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-users"></i>
-                <span>${peneira.categoria}</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-info-circle"></i>
-                <span>${peneira.requisitos}</span>
-            </div>
-            <div class="info-item">
-                <i class="fas fa-phone"></i>
-                <span>${peneira.contato}</span>
+            <div class="card-badges">
+                <span class="distance-badge">${distanciaTexto}</span>
+                ${statusInfo.badge}
             </div>
         </div>
         
-        ${vagasInfo.html}
+        ${statusInfo.banner}
         
-        ${peneira.status === 'aberta' ? `
-        <div class="prazo-inscricao">
-            <div class="prazo-info">
-                <i class="fas fa-hourglass-half"></i>
-                <div class="prazo-text">
-                    <span class="prazo-label">Prazo para inscrição:</span>
-                    <span class="prazo-data">${prazoFormatado}</span>
-                    <span class="prazo-restante">${diasRestantes}</span>
+        <div class="card-content">
+            <div class="event-details">
+                <div class="detail-row primary">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>${dataFormatada} às ${peneira.horario}</span>
+                </div>
+                <div class="detail-row">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>${peneira.endereco}</span>
+                </div>
+                <div class="detail-row">
+                    <i class="fas fa-users"></i>
+                    <span>${peneira.categoria}</span>
                 </div>
             </div>
+            
+            ${vagasInfo.html}
+            ${prazoInfo.html}
         </div>
-        ` : ''}
         
-        <div class="result-actions">
+        <div class="card-actions">
             ${peneira.status === 'aberta' ? `
                 <button class="btn-primary" onclick="openDirections('${peneira.endereco}')">
-                    <i class="fas fa-directions"></i>
+                    <i class="fas fa-route"></i>
                     <span>Como Chegar</span>
                 </button>
                 <button class="btn-secondary" onclick="shareResult(${peneira.id})">
-                    <i class="fas fa-share"></i>
-                    <span>Compartilhar</span>
+                    <i class="fas fa-share-alt"></i>
                 </button>
             ` : `
                 <button class="btn-disabled" disabled>
-                    <i class="fas fa-times-circle"></i>
-                    <span>Inscrições Encerradas</span>
+                    <i class="fas fa-lock"></i>
+                    <span>Encerrada</span>
                 </button>
                 <button class="btn-secondary" onclick="shareResult(${peneira.id})">
-                    <i class="fas fa-share"></i>
-                    <span>Compartilhar</span>
+                    <i class="fas fa-share-alt"></i>
                 </button>
             `}
         </div>
     `;
     
     // Adicionar classe de status ao card
-    card.classList.add(`status-${peneira.status}`);
+    card.classList.add(`card-${peneira.status}`);
     
     return card;
 }
 
-// Função para obter informações de status
+// Função refinada para obter informações de status
 function getStatusInfo(peneira) {
     if (peneira.status === 'encerrada') {
         return {
-            html: `
-                <div class="status-banner status-encerrada">
-                    <i class="fas fa-times-circle"></i>
-                    <span>Inscrições Encerradas</span>
-                </div>
-            `
+            badge: '<span class="status-badge status-closed">Encerrada</span>',
+            banner: '<div class="status-banner closed"><i class="fas fa-times-circle"></i><span>Inscrições Encerradas</span></div>'
         };
     }
-    return { html: '' };
+    
+    // Para peneiras abertas, mostrar badge de disponibilidade baseado nas vagas
+    let availabilityBadge = '';
+    if (peneira.vagasDisponiveis <= 5) {
+        availabilityBadge = '<span class="status-badge status-urgent">Últimas Vagas</span>';
+    } else if (peneira.vagasDisponiveis <= 10) {
+        availabilityBadge = '<span class="status-badge status-limited">Vagas Limitadas</span>';
+    } else {
+        availabilityBadge = '<span class="status-badge status-open">Disponível</span>';
+    }
+    
+    return {
+        badge: availabilityBadge,
+        banner: ''
+    };
 }
 
-// Função para obter informações de vagas
+// Função refinada para obter informações de vagas
 function getVagasInfo(peneira) {
     if (peneira.status !== 'aberta') {
         return { html: '' };
     }
     
     const percentualOcupado = ((peneira.totalVagas - peneira.vagasDisponiveis) / peneira.totalVagas) * 100;
-    let classeEscassez = '';
-    let icone = 'fas fa-users';
-    let texto = '';
-    
-    if (peneira.vagasDisponiveis <= 5) {
-        classeEscassez = 'escassez-critica';
-        icone = 'fas fa-exclamation-triangle';
-        texto = 'Poucas vagas restantes!';
-    } else if (peneira.vagasDisponiveis <= 10) {
-        classeEscassez = 'escassez-alta';
-        icone = 'fas fa-exclamation-circle';
-        texto = 'Vagas limitadas';
-    } else {
-        classeEscassez = 'vagas-disponiveis';
-        icone = 'fas fa-check-circle';
-        texto = 'Vagas disponíveis';
-    }
     
     return {
         html: `
-            <div class="vagas-info ${classeEscassez}">
-                <div class="vagas-header">
-                    <i class="${icone}"></i>
-                    <span class="vagas-texto">${texto}</span>
-                    <span class="vagas-contador">${peneira.vagasDisponiveis}/${peneira.totalVagas} vagas</span>
+            <div class="availability-section">
+                <div class="availability-header">
+                    <span class="availability-label">Disponibilidade</span>
+                    <span class="availability-count">${peneira.vagasDisponiveis} de ${peneira.totalVagas} vagas</span>
                 </div>
-                <div class="vagas-barra">
-                    <div class="vagas-progresso" style="width: ${percentualOcupado}%"></div>
+                <div class="availability-bar">
+                    <div class="availability-progress" style="width: ${percentualOcupado}%"></div>
+                </div>
+            </div>
+        `
+    };
+}
+
+// Função refinada para obter informações de prazo
+function getPrazoInfo(peneira) {
+    if (peneira.status !== 'aberta') {
+        return { html: '' };
+    }
+    
+    const diasRestantes = getDiasRestantes(peneira.prazoInscricao);
+    const prazoFormatado = formatDate(peneira.prazoInscricao);
+    
+    return {
+        html: `
+            <div class="deadline-section">
+                <div class="deadline-info">
+                    <i class="fas fa-clock"></i>
+                    <div class="deadline-text">
+                        <span class="deadline-label">Prazo de inscrição</span>
+                        <span class="deadline-date">${prazoFormatado}</span>
+                        <span class="deadline-remaining">${diasRestantes}</span>
+                    </div>
                 </div>
             </div>
         `
@@ -992,7 +978,7 @@ const additionalStyles = `
     }
     
     /* Melhorias para hover states */
-    .result-card:hover .result-title {
+    .result-card:hover .card-title {
         color: var(--primary-color);
     }
     
