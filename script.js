@@ -1,4 +1,4 @@
-// Dados simulados de peneiras de futebol
+// Dados simulados de peneiras de futebol - VERSÃO APRIMORADA
 const peneirasData = [
     {
         id: 1,
@@ -12,7 +12,13 @@ const peneirasData = [
         contato: "(13) 3257-4000",
         distancia: 2.5,
         lat: -23.9618,
-        lng: -46.3322
+        lng: -46.3322,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "aberta", // "aberta", "encerrada", "em_breve"
+        vagasDisponiveis: 8,
+        totalVagas: 50,
+        prazoInscricao: "2024-08-10",
+        inscricaoEncerrada: false
     },
     {
         id: 2,
@@ -26,7 +32,13 @@ const peneirasData = [
         contato: "(11) 3670-8100",
         distancia: 5.8,
         lat: -23.5505,
-        lng: -46.6333
+        lng: -46.6333,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "encerrada",
+        vagasDisponiveis: 0,
+        totalVagas: 40,
+        prazoInscricao: "2024-08-15",
+        inscricaoEncerrada: true
     },
     {
         id: 3,
@@ -40,7 +52,13 @@ const peneirasData = [
         contato: "(11) 2095-3000",
         distancia: 8.2,
         lat: -23.5629,
-        lng: -46.6544
+        lng: -46.6544,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "aberta",
+        vagasDisponiveis: 3,
+        totalVagas: 30,
+        prazoInscricao: "2024-08-20",
+        inscricaoEncerrada: false
     },
     {
         id: 4,
@@ -54,7 +72,13 @@ const peneirasData = [
         contato: "(11) 3873-2400",
         distancia: 12.1,
         lat: -23.5629,
-        lng: -46.6544
+        lng: -46.6544,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "aberta",
+        vagasDisponiveis: 15,
+        totalVagas: 60,
+        prazoInscricao: "2024-08-28",
+        inscricaoEncerrada: false
     },
     {
         id: 5,
@@ -68,7 +92,13 @@ const peneirasData = [
         contato: "(11) 4034-1900",
         distancia: 45.3,
         lat: -22.9519,
-        lng: -46.5428
+        lng: -46.5428,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "encerrada",
+        vagasDisponiveis: 0,
+        totalVagas: 25,
+        prazoInscricao: "2024-09-01",
+        inscricaoEncerrada: true
     },
     {
         id: 6,
@@ -82,7 +112,13 @@ const peneirasData = [
         contato: "(19) 3231-3444",
         distancia: 35.7,
         lat: -22.9056,
-        lng: -47.0608
+        lng: -47.0608,
+        // NOVOS CAMPOS ADICIONADOS
+        status: "aberta",
+        vagasDisponiveis: 22,
+        totalVagas: 35,
+        prazoInscricao: "2024-09-07",
+        inscricaoEncerrada: false
     }
 ];
 
@@ -517,15 +553,25 @@ function displayResults(results) {
     });
 }
 
-// Função para criar card de resultado
+// FUNÇÃO APRIMORADA PARA CRIAR CARD DE RESULTADO
 function createResultCard(peneira) {
     const card = document.createElement('div');
     card.className = 'result-card';
     
     const dataFormatada = formatDate(peneira.data);
+    const prazoFormatado = formatDate(peneira.prazoInscricao);
     const distanciaTexto = peneira.distancia < 1 ? 
         `${Math.round(peneira.distancia * 1000)}m` : 
         `${peneira.distancia}km`;
+    
+    // Determinar status da peneira
+    const statusInfo = getStatusInfo(peneira);
+    
+    // Determinar escassez de vagas
+    const vagasInfo = getVagasInfo(peneira);
+    
+    // Calcular dias restantes para inscrição
+    const diasRestantes = getDiasRestantes(peneira.prazoInscricao);
     
     card.innerHTML = `
         <div class="result-header">
@@ -535,6 +581,8 @@ function createResultCard(peneira) {
             </div>
             <span class="result-distance">${distanciaTexto}</span>
         </div>
+        
+        ${statusInfo.html}
         
         <div class="result-info">
             <div class="info-item">
@@ -563,19 +611,124 @@ function createResultCard(peneira) {
             </div>
         </div>
         
+        ${vagasInfo.html}
+        
+        ${peneira.status === 'aberta' ? `
+        <div class="prazo-inscricao">
+            <div class="prazo-info">
+                <i class="fas fa-hourglass-half"></i>
+                <div class="prazo-text">
+                    <span class="prazo-label">Prazo para inscrição:</span>
+                    <span class="prazo-data">${prazoFormatado}</span>
+                    <span class="prazo-restante">${diasRestantes}</span>
+                </div>
+            </div>
+        </div>
+        ` : ''}
+        
         <div class="result-actions">
-            <button class="btn-primary" onclick="openDirections('${peneira.endereco}')">
-                <i class="fas fa-directions"></i>
-                <span>Como Chegar</span>
-            </button>
-            <button class="btn-secondary" onclick="shareResult(${peneira.id})">
-                <i class="fas fa-share"></i>
-                <span>Compartilhar</span>
-            </button>
+            ${peneira.status === 'aberta' ? `
+                <button class="btn-primary" onclick="openDirections('${peneira.endereco}')">
+                    <i class="fas fa-directions"></i>
+                    <span>Como Chegar</span>
+                </button>
+                <button class="btn-secondary" onclick="shareResult(${peneira.id})">
+                    <i class="fas fa-share"></i>
+                    <span>Compartilhar</span>
+                </button>
+            ` : `
+                <button class="btn-disabled" disabled>
+                    <i class="fas fa-times-circle"></i>
+                    <span>Inscrições Encerradas</span>
+                </button>
+                <button class="btn-secondary" onclick="shareResult(${peneira.id})">
+                    <i class="fas fa-share"></i>
+                    <span>Compartilhar</span>
+                </button>
+            `}
         </div>
     `;
     
+    // Adicionar classe de status ao card
+    card.classList.add(`status-${peneira.status}`);
+    
     return card;
+}
+
+// Função para obter informações de status
+function getStatusInfo(peneira) {
+    if (peneira.status === 'encerrada') {
+        return {
+            html: `
+                <div class="status-banner status-encerrada">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Inscrições Encerradas</span>
+                </div>
+            `
+        };
+    }
+    return { html: '' };
+}
+
+// Função para obter informações de vagas
+function getVagasInfo(peneira) {
+    if (peneira.status !== 'aberta') {
+        return { html: '' };
+    }
+    
+    const percentualOcupado = ((peneira.totalVagas - peneira.vagasDisponiveis) / peneira.totalVagas) * 100;
+    let classeEscassez = '';
+    let icone = 'fas fa-users';
+    let texto = '';
+    
+    if (peneira.vagasDisponiveis <= 5) {
+        classeEscassez = 'escassez-critica';
+        icone = 'fas fa-exclamation-triangle';
+        texto = 'Poucas vagas restantes!';
+    } else if (peneira.vagasDisponiveis <= 10) {
+        classeEscassez = 'escassez-alta';
+        icone = 'fas fa-exclamation-circle';
+        texto = 'Vagas limitadas';
+    } else {
+        classeEscassez = 'vagas-disponiveis';
+        icone = 'fas fa-check-circle';
+        texto = 'Vagas disponíveis';
+    }
+    
+    return {
+        html: `
+            <div class="vagas-info ${classeEscassez}">
+                <div class="vagas-header">
+                    <i class="${icone}"></i>
+                    <span class="vagas-texto">${texto}</span>
+                    <span class="vagas-contador">${peneira.vagasDisponiveis}/${peneira.totalVagas} vagas</span>
+                </div>
+                <div class="vagas-barra">
+                    <div class="vagas-progresso" style="width: ${percentualOcupado}%"></div>
+                </div>
+            </div>
+        `
+    };
+}
+
+// Função para calcular dias restantes
+function getDiasRestantes(prazoInscricao) {
+    const hoje = new Date();
+    const prazo = new Date(prazoInscricao);
+    const diffTime = prazo - hoje;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays < 0) {
+        return 'Prazo expirado';
+    } else if (diffDays === 0) {
+        return 'Último dia!';
+    } else if (diffDays === 1) {
+        return 'Termina amanhã';
+    } else if (diffDays <= 7) {
+        return `${diffDays} dias restantes`;
+    } else {
+        return `${diffDays} dias restantes`;
+    }
 }
 
 // Função para formatar data
@@ -943,3 +1096,4 @@ function adjustForDevice() {
 // Chamar na inicialização e no resize
 adjustForDevice();
 window.addEventListener('resize', debounce(adjustForDevice, 250));
+
