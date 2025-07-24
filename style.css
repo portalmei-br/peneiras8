@@ -1958,3 +1958,491 @@ body {
 }
 
 /* Address Info Styles */
+
+/* ========================================= */
+/* ESTILOS APRIMORADOS PARA CARDS DAS PENEIRAS */
+/* ========================================= */
+
+/* ESTILOS APRIMORADOS PARA OS CARDS DAS PENEIRAS */
+
+/* Status Banner - Inscrições Encerradas */
+.status-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-lg);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    animation: slideInDown 0.4s ease-out;
+}
+
+.status-encerrada {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: var(--text-light);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+}
+
+.status-encerrada i {
+    font-size: var(--font-size-lg);
+    animation: pulse 2s infinite;
+}
+
+/* Informações de Vagas */
+.vagas-info {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--radius-lg);
+    border: 2px solid;
+    transition: all var(--transition-normal);
+}
+
+.vagas-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+}
+
+.vagas-texto {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    flex: 1;
+}
+
+.vagas-contador {
+    font-weight: 700;
+    font-size: var(--font-size-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.vagas-barra {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    position: relative;
+}
+
+.vagas-progresso {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 1s ease-out;
+    position: relative;
+}
+
+.vagas-progresso::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.1) 50%, 
+        rgba(255, 255, 255, 0.3) 100%);
+    animation: shimmer 2s infinite;
+}
+
+/* Escassez Crítica (≤ 5 vagas) */
+.escassez-critica {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(211, 47, 47, 0.1) 100%);
+    border-color: #f44336;
+    color: #d32f2f;
+}
+
+.escassez-critica .vagas-progresso {
+    background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%);
+}
+
+.escassez-critica .vagas-header i {
+    color: #f44336;
+    animation: warning-pulse 1.5s infinite;
+}
+
+/* Escassez Alta (≤ 10 vagas) */
+.escassez-alta {
+    background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(245, 124, 0, 0.1) 100%);
+    border-color: #ff9800;
+    color: #f57c00;
+}
+
+.escassez-alta .vagas-progresso {
+    background: linear-gradient(90deg, #ff9800 0%, #f57c00 100%);
+}
+
+.escassez-alta .vagas-header i {
+    color: #ff9800;
+}
+
+/* Vagas Disponíveis (> 10 vagas) */
+.vagas-disponiveis {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(69, 160, 73, 0.1) 100%);
+    border-color: #4CAF50;
+    color: #2E7D32;
+}
+
+.vagas-disponiveis .vagas-progresso {
+    background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
+}
+
+.vagas-disponiveis .vagas-header i {
+    color: #4CAF50;
+}
+
+/* Prazo para Inscrição */
+.prazo-inscricao {
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-lg);
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%);
+    border: 2px solid #2196F3;
+    border-radius: var(--radius-lg);
+    color: #1976D2;
+}
+
+.prazo-info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.prazo-info i {
+    color: #2196F3;
+    font-size: var(--font-size-lg);
+    flex-shrink: 0;
+}
+
+.prazo-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1;
+}
+
+.prazo-label {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.prazo-data {
+    font-weight: 700;
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+}
+
+.prazo-restante {
+    font-weight: 500;
+    font-size: var(--font-size-sm);
+    color: #1976D2;
+    padding: var(--space-xs) var(--space-sm);
+    background: rgba(33, 150, 243, 0.2);
+    border-radius: var(--radius-full);
+    align-self: flex-start;
+}
+
+/* Botão Desabilitado */
+.btn-disabled {
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    font-weight: 600;
+    cursor: not-allowed;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    box-shadow: var(--shadow-sm);
+    flex: 1;
+    justify-content: center;
+    opacity: 0.7;
+    transition: none;
+}
+
+.btn-disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Modificações nos Cards por Status */
+.result-card.status-encerrada {
+    opacity: 0.85;
+    filter: grayscale(20%);
+    border-color: rgba(244, 67, 54, 0.3);
+}
+
+.result-card.status-encerrada::before {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.result-card.status-encerrada .result-title {
+    color: var(--text-secondary);
+}
+
+.result-card.status-encerrada .result-club {
+    color: var(--text-tertiary);
+}
+
+/* Animações */
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes warning-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* Responsividade para Mobile */
+@media (max-width: 768px) {
+    .status-banner {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.7rem;
+        margin-bottom: var(--space-md);
+    }
+    
+    .vagas-info {
+        padding: var(--space-sm) var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+    
+    .vagas-header {
+        gap: var(--space-sm);
+        flex-wrap: wrap;
+    }
+    
+    .vagas-texto {
+        font-size: 0.7rem;
+    }
+    
+    .vagas-contador {
+        font-size: 0.7rem;
+        padding: 2px var(--space-xs);
+    }
+    
+    .prazo-inscricao {
+        padding: var(--space-sm) var(--space-md);
+        margin-bottom: var(--space-md);
+    }
+    
+    .prazo-info {
+        gap: var(--space-sm);
+    }
+    
+    .prazo-label {
+        font-size: 0.7rem;
+    }
+    
+    .prazo-data {
+        font-size: var(--font-size-sm);
+    }
+    
+    .prazo-restante {
+        font-size: 0.7rem;
+        padding: 2px var(--space-xs);
+    }
+    
+    .btn-disabled {
+        padding: var(--space-sm) var(--space-md);
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .status-banner {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.6rem;
+        gap: var(--space-xs);
+    }
+    
+    .vagas-info {
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .vagas-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+    
+    .vagas-texto,
+    .vagas-contador {
+        font-size: 0.6rem;
+    }
+    
+    .vagas-barra {
+        height: 4px;
+    }
+    
+    .prazo-inscricao {
+        padding: var(--space-xs) var(--space-sm);
+    }
+    
+    .prazo-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+    
+    .prazo-label,
+    .prazo-restante {
+        font-size: 0.6rem;
+    }
+    
+    .prazo-data {
+        font-size: 0.7rem;
+    }
+}
+
+/* Melhorias de Acessibilidade */
+.status-banner,
+.vagas-info,
+.prazo-inscricao {
+    position: relative;
+}
+
+.status-banner:focus-within,
+.vagas-info:focus-within,
+.prazo-inscricao:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Estados de Hover Aprimorados */
+.result-card:hover .vagas-info {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-card:hover .prazo-inscricao {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+}
+
+/* Transições Suaves */
+.vagas-info,
+.prazo-inscricao {
+    transition: all var(--transition-normal);
+}
+
+/* Indicadores Visuais Adicionais */
+.escassez-critica::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #f44336, transparent, #f44336);
+    border-radius: var(--radius-lg);
+    z-index: -1;
+    animation: border-glow 2s infinite;
+}
+
+@keyframes border-glow {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Melhorias para Contraste */
+@media (prefers-contrast: high) {
+    .vagas-info,
+    .prazo-inscricao,
+    .status-banner {
+        border-width: 3px;
+    }
+    
+    .vagas-texto,
+    .prazo-label,
+    .status-banner {
+        font-weight: 700;
+    }
+}
+
+/* Suporte para Modo Escuro */
+@media (prefers-color-scheme: dark) {
+    .vagas-info {
+        background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .prazo-inscricao {
+        background: rgba(33, 150, 243, 0.15);
+    }
+    
+    .status-encerrada {
+        background: linear-gradient(135deg, rgba(244, 67, 54, 0.8) 0%, rgba(211, 47, 47, 0.8) 100%);
+    }
+}
+
+/* Animações de Entrada Escalonadas */
+.result-card .status-banner {
+    animation-delay: 0.1s;
+}
+
+.result-card .vagas-info {
+    animation-delay: 0.2s;
+}
+
+.result-card .prazo-inscricao {
+    animation-delay: 0.3s;
+}
+
+/* Efeitos de Micro-interação */
+.vagas-barra:hover .vagas-progresso {
+    transform: scaleY(1.2);
+    transition: transform 0.2s ease-out;
+}
+
+.prazo-restante:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-out;
+}
+
