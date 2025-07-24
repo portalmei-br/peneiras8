@@ -1960,86 +1960,252 @@ body {
 /* Address Info Styles */
 
 /* ========================================= */
-/* ESTILOS APRIMORADOS PARA CARDS DAS PENEIRAS */
+/* DESIGN REFINADO E PROFISSIONAL DOS CARDS */
 /* ========================================= */
 
-/* ESTILOS APRIMORADOS PARA OS CARDS DAS PENEIRAS */
+/* ========================================= */
+/* ESTILOS REFINADOS PARA CARDS DAS PENEIRAS */
+/* Design Profissional e Harmonioso */
+/* ========================================= */
 
-/* Status Banner - Inscrições Encerradas */
+/* Card Principal - Design Limpo e Elegante */
+.result-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-xl);
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    transition: all var(--transition-normal);
+    border: 1px solid var(--border-light);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+}
+
+.result-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    transition: all var(--transition-normal);
+}
+
+.result-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+.result-card:hover::before {
+    width: 6px;
+}
+
+/* Header do Card - Título e Badges */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: var(--space-xl) var(--space-xl) var(--space-lg);
+    gap: var(--space-lg);
+}
+
+.card-title-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+    line-height: var(--leading-snug);
+    word-wrap: break-word;
+}
+
+.card-club {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    margin: 0;
+}
+
+.card-badges {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+/* Badges - Design Minimalista */
+.distance-badge {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+    color: var(--text-primary);
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+    white-space: nowrap;
+}
+
+.status-badge {
+    padding: var(--space-xs) var(--space-md);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.status-open {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.status-limited {
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(255, 152, 0, 0.3);
+}
+
+.status-urgent {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
+    animation: gentle-pulse 2s infinite;
+}
+
+.status-closed {
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(158, 158, 158, 0.3);
+}
+
+/* Banner de Status - Apenas para Encerradas */
 .status-banner {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: var(--space-sm);
-    padding: var(--space-md) var(--space-lg);
-    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-xl);
+    margin: 0 var(--space-xl) var(--space-lg);
     border-radius: var(--radius-lg);
     font-weight: 600;
     font-size: var(--font-size-sm);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    animation: slideInDown 0.4s ease-out;
 }
 
-.status-encerrada {
-    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-    color: var(--text-light);
-    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+.status-banner.closed {
+    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(211, 47, 47, 0.1) 100%);
+    color: #d32f2f;
+    border: 2px solid rgba(244, 67, 54, 0.3);
 }
 
-.status-encerrada i {
+.status-banner.closed i {
     font-size: var(--font-size-lg);
-    animation: pulse 2s infinite;
+    color: #f44336;
 }
 
-/* Informações de Vagas */
-.vagas-info {
-    margin-bottom: var(--space-lg);
-    padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-lg);
-    border: 2px solid;
-    transition: all var(--transition-normal);
+/* Conteúdo do Card */
+.card-content {
+    padding: 0 var(--space-xl) var(--space-xl);
 }
 
-.vagas-header {
+/* Detalhes do Evento - Layout Limpo */
+.event-details {
+    margin-bottom: var(--space-xl);
+}
+
+.detail-row {
     display: flex;
     align-items: center;
     gap: var(--space-md);
+    padding: var(--space-sm) 0;
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: var(--leading-normal);
+}
+
+.detail-row.primary {
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: var(--font-size-base);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--border-light);
     margin-bottom: var(--space-sm);
 }
 
-.vagas-texto {
+.detail-row i {
+    color: var(--primary-color);
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.detail-row.primary i {
+    color: var(--primary-color);
+    font-size: var(--font-size-lg);
+}
+
+/* Seção de Disponibilidade - Design Elegante */
+.availability-section {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.05) 0%, rgba(46, 125, 50, 0.05) 100%);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.availability-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-md);
+}
+
+.availability-label {
     font-weight: 600;
     font-size: var(--font-size-sm);
-    flex: 1;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.vagas-contador {
+.availability-count {
     font-weight: 700;
     font-size: var(--font-size-sm);
+    color: var(--primary-color);
+    background: rgba(76, 175, 80, 0.1);
     padding: var(--space-xs) var(--space-sm);
     border-radius: var(--radius-full);
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
 }
 
-.vagas-barra {
+.availability-bar {
     width: 100%;
     height: 6px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(76, 175, 80, 0.2);
     border-radius: var(--radius-full);
     overflow: hidden;
     position: relative;
 }
 
-.vagas-progresso {
+.availability-progress {
     height: 100%;
+    background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-light) 100%);
     border-radius: var(--radius-full);
-    transition: width 1s ease-out;
+    transition: width 1.2s ease-out;
     position: relative;
 }
 
-.vagas-progresso::after {
+.availability-progress::after {
     content: '';
     position: absolute;
     top: 0;
@@ -2053,108 +2219,120 @@ body {
     animation: shimmer 2s infinite;
 }
 
-/* Escassez Crítica (≤ 5 vagas) */
-.escassez-critica {
-    background: linear-gradient(135deg, rgba(244, 67, 54, 0.1) 0%, rgba(211, 47, 47, 0.1) 100%);
-    border-color: #f44336;
-    color: #d32f2f;
-}
-
-.escassez-critica .vagas-progresso {
-    background: linear-gradient(90deg, #f44336 0%, #d32f2f 100%);
-}
-
-.escassez-critica .vagas-header i {
-    color: #f44336;
-    animation: warning-pulse 1.5s infinite;
-}
-
-/* Escassez Alta (≤ 10 vagas) */
-.escassez-alta {
-    background: linear-gradient(135deg, rgba(255, 152, 0, 0.1) 0%, rgba(245, 124, 0, 0.1) 100%);
-    border-color: #ff9800;
-    color: #f57c00;
-}
-
-.escassez-alta .vagas-progresso {
-    background: linear-gradient(90deg, #ff9800 0%, #f57c00 100%);
-}
-
-.escassez-alta .vagas-header i {
-    color: #ff9800;
-}
-
-/* Vagas Disponíveis (> 10 vagas) */
-.vagas-disponiveis {
-    background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(69, 160, 73, 0.1) 100%);
-    border-color: #4CAF50;
-    color: #2E7D32;
-}
-
-.vagas-disponiveis .vagas-progresso {
-    background: linear-gradient(90deg, #4CAF50 0%, #45a049 100%);
-}
-
-.vagas-disponiveis .vagas-header i {
-    color: #4CAF50;
-}
-
-/* Prazo para Inscrição */
-.prazo-inscricao {
-    margin-bottom: var(--space-lg);
-    padding: var(--space-md) var(--space-lg);
-    background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(25, 118, 210, 0.1) 100%);
-    border: 2px solid #2196F3;
+/* Seção de Prazo - Design Sutil */
+.deadline-section {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(25, 118, 210, 0.05) 100%);
+    border: 1px solid rgba(33, 150, 243, 0.2);
     border-radius: var(--radius-lg);
-    color: #1976D2;
+    padding: var(--space-lg);
+    margin-bottom: var(--space-lg);
 }
 
-.prazo-info {
+.deadline-info {
     display: flex;
     align-items: center;
     gap: var(--space-md);
 }
 
-.prazo-info i {
+.deadline-info i {
     color: #2196F3;
     font-size: var(--font-size-lg);
     flex-shrink: 0;
 }
 
-.prazo-text {
+.deadline-text {
     display: flex;
     flex-direction: column;
     gap: var(--space-xs);
     flex: 1;
 }
 
-.prazo-label {
+.deadline-label {
     font-weight: 600;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: var(--text-secondary);
 }
 
-.prazo-data {
-    font-weight: 700;
-    font-size: var(--font-size-base);
+.deadline-date {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
     color: var(--text-primary);
 }
 
-.prazo-restante {
+.deadline-remaining {
     font-weight: 500;
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-xs);
     color: #1976D2;
+    background: rgba(33, 150, 243, 0.1);
     padding: var(--space-xs) var(--space-sm);
-    background: rgba(33, 150, 243, 0.2);
     border-radius: var(--radius-full);
     align-self: flex-start;
 }
 
-/* Botão Desabilitado */
-.btn-disabled {
-    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
+/* Ações do Card - Botões Refinados */
+.card-actions {
+    display: flex;
+    gap: var(--space-md);
+    padding: var(--space-lg) var(--space-xl) var(--space-xl);
+    border-top: 1px solid var(--border-light);
+    background: rgba(248, 249, 250, 0.5);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     color: var(--text-light);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--font-size-sm);
+    box-shadow: 0 2px 8px rgba(27, 94, 32, 0.3);
+    flex: 1;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(27, 94, 32, 0.4);
+    background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary-lighter) 100%);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-sm);
+    width: 48px;
+    height: 48px;
+}
+
+.btn-secondary:hover {
+    background: var(--primary-color);
+    color: var(--text-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(27, 94, 32, 0.3);
+}
+
+.btn-disabled {
+    background: linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%);
+    color: var(--text-secondary);
     border: none;
     border-radius: var(--radius-md);
     padding: var(--space-md) var(--space-lg);
@@ -2165,57 +2343,38 @@ body {
     align-items: center;
     gap: var(--space-sm);
     font-size: var(--font-size-sm);
-    box-shadow: var(--shadow-sm);
     flex: 1;
     justify-content: center;
-    opacity: 0.7;
-    transition: none;
+    opacity: 0.8;
 }
 
-.btn-disabled:hover {
-    transform: none;
-    box-shadow: var(--shadow-sm);
+/* Estados dos Cards por Status */
+.card-encerrada {
+    opacity: 0.9;
+    filter: grayscale(10%);
 }
 
-/* Modificações nos Cards por Status */
-.result-card.status-encerrada {
-    opacity: 0.85;
-    filter: grayscale(20%);
-    border-color: rgba(244, 67, 54, 0.3);
+.card-encerrada::before {
+    background: linear-gradient(135deg, #9E9E9E 0%, #757575 100%);
 }
 
-.result-card.status-encerrada::before {
-    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
-}
-
-.result-card.status-encerrada .result-title {
+.card-encerrada .card-title {
     color: var(--text-secondary);
 }
 
-.result-card.status-encerrada .result-club {
+.card-encerrada .card-club {
     color: var(--text-tertiary);
 }
 
-/* Animações */
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes warning-pulse {
+/* Animações Suaves */
+@keyframes gentle-pulse {
     0%, 100% {
         transform: scale(1);
         opacity: 1;
     }
     50% {
-        transform: scale(1.1);
-        opacity: 0.8;
+        transform: scale(1.02);
+        opacity: 0.9;
     }
 }
 
@@ -2228,220 +2387,251 @@ body {
     }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.7;
-    }
-}
-
-/* Responsividade para Mobile */
+/* Responsividade Refinada */
 @media (max-width: 768px) {
-    .status-banner {
-        padding: var(--space-sm) var(--space-md);
-        font-size: 0.7rem;
-        margin-bottom: var(--space-md);
+    .card-header {
+        padding: var(--space-lg) var(--space-lg) var(--space-md);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-md);
     }
     
-    .vagas-info {
-        padding: var(--space-sm) var(--space-md);
-        margin-bottom: var(--space-md);
+    .card-badges {
+        flex-direction: row;
+        align-items: center;
+        align-self: stretch;
+        justify-content: space-between;
     }
     
-    .vagas-header {
-        gap: var(--space-sm);
-        flex-wrap: wrap;
+    .card-title {
+        font-size: var(--font-size-lg);
     }
     
-    .vagas-texto {
-        font-size: 0.7rem;
+    .card-content {
+        padding: 0 var(--space-lg) var(--space-lg);
     }
     
-    .vagas-contador {
-        font-size: 0.7rem;
-        padding: 2px var(--space-xs);
-    }
-    
-    .prazo-inscricao {
-        padding: var(--space-sm) var(--space-md);
-        margin-bottom: var(--space-md);
-    }
-    
-    .prazo-info {
+    .detail-row {
+        font-size: var(--font-size-xs);
         gap: var(--space-sm);
     }
     
-    .prazo-label {
-        font-size: 0.7rem;
-    }
-    
-    .prazo-data {
+    .detail-row.primary {
         font-size: var(--font-size-sm);
     }
     
-    .prazo-restante {
-        font-size: 0.7rem;
-        padding: 2px var(--space-xs);
+    .availability-section,
+    .deadline-section {
+        padding: var(--space-md);
+        margin-bottom: var(--space-md);
     }
     
+    .availability-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-xs);
+    }
+    
+    .deadline-info {
+        gap: var(--space-sm);
+    }
+    
+    .card-actions {
+        padding: var(--space-md) var(--space-lg) var(--space-lg);
+        gap: var(--space-sm);
+    }
+    
+    .btn-primary,
     .btn-disabled {
         padding: var(--space-sm) var(--space-md);
-        font-size: 0.7rem;
+        font-size: var(--font-size-xs);
+    }
+    
+    .btn-secondary {
+        width: 40px;
+        height: 40px;
+        padding: var(--space-sm);
+    }
+    
+    .status-banner {
+        margin: 0 var(--space-lg) var(--space-md);
+        padding: var(--space-sm) var(--space-md);
+        font-size: var(--font-size-xs);
     }
 }
 
 @media (max-width: 480px) {
-    .status-banner {
-        padding: var(--space-xs) var(--space-sm);
-        font-size: 0.6rem;
-        gap: var(--space-xs);
+    .card-header {
+        padding: var(--space-md);
     }
     
-    .vagas-info {
-        padding: var(--space-xs) var(--space-sm);
+    .card-content {
+        padding: 0 var(--space-md) var(--space-md);
     }
     
-    .vagas-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-xs);
+    .card-title {
+        font-size: var(--font-size-base);
     }
     
-    .vagas-texto,
-    .vagas-contador {
-        font-size: 0.6rem;
-    }
-    
-    .vagas-barra {
-        height: 4px;
-    }
-    
-    .prazo-inscricao {
-        padding: var(--space-xs) var(--space-sm);
-    }
-    
-    .prazo-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-xs);
-    }
-    
-    .prazo-label,
-    .prazo-restante {
-        font-size: 0.6rem;
-    }
-    
-    .prazo-data {
+    .detail-row {
         font-size: 0.7rem;
+    }
+    
+    .detail-row.primary {
+        font-size: var(--font-size-xs);
+    }
+    
+    .availability-section,
+    .deadline-section {
+        padding: var(--space-sm);
+    }
+    
+    .availability-label,
+    .deadline-label {
+        font-size: 0.6rem;
+    }
+    
+    .availability-count,
+    .deadline-date {
+        font-size: 0.7rem;
+    }
+    
+    .deadline-remaining {
+        font-size: 0.6rem;
+        padding: 2px var(--space-xs);
+    }
+    
+    .card-actions {
+        padding: var(--space-sm) var(--space-md) var(--space-md);
+    }
+    
+    .btn-primary,
+    .btn-disabled {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.7rem;
+    }
+    
+    .btn-secondary {
+        width: 36px;
+        height: 36px;
+        font-size: 0.7rem;
+    }
+    
+    .status-banner {
+        margin: 0 var(--space-md) var(--space-sm);
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.6rem;
+    }
+    
+    .distance-badge,
+    .status-badge {
+        font-size: 0.6rem;
+        padding: 2px var(--space-xs);
     }
 }
 
 /* Melhorias de Acessibilidade */
-.status-banner,
-.vagas-info,
-.prazo-inscricao {
-    position: relative;
-}
-
-.status-banner:focus-within,
-.vagas-info:focus-within,
-.prazo-inscricao:focus-within {
+.result-card:focus-within {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
 
-/* Estados de Hover Aprimorados */
-.result-card:hover .vagas-info {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.btn-primary:focus,
+.btn-secondary:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
-.result-card:hover .prazo-inscricao {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.2);
+/* Estados de Hover Refinados */
+.result-card:hover .availability-section {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.08) 0%, rgba(46, 125, 50, 0.08) 100%);
+    border-color: rgba(76, 175, 80, 0.3);
 }
 
-/* Transições Suaves */
-.vagas-info,
-.prazo-inscricao {
+.result-card:hover .deadline-section {
+    background: linear-gradient(135deg, rgba(33, 150, 243, 0.08) 0%, rgba(25, 118, 210, 0.08) 100%);
+    border-color: rgba(33, 150, 243, 0.3);
+}
+
+/* Transições Suaves para Todos os Elementos */
+.availability-section,
+.deadline-section,
+.card-badges,
+.detail-row {
     transition: all var(--transition-normal);
-}
-
-/* Indicadores Visuais Adicionais */
-.escassez-critica::after {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #f44336, transparent, #f44336);
-    border-radius: var(--radius-lg);
-    z-index: -1;
-    animation: border-glow 2s infinite;
-}
-
-@keyframes border-glow {
-    0%, 100% {
-        opacity: 0.5;
-    }
-    50% {
-        opacity: 1;
-    }
-}
-
-/* Melhorias para Contraste */
-@media (prefers-contrast: high) {
-    .vagas-info,
-    .prazo-inscricao,
-    .status-banner {
-        border-width: 3px;
-    }
-    
-    .vagas-texto,
-    .prazo-label,
-    .status-banner {
-        font-weight: 700;
-    }
 }
 
 /* Suporte para Modo Escuro */
 @media (prefers-color-scheme: dark) {
-    .vagas-info {
+    .result-card {
         background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
     }
     
-    .prazo-inscricao {
-        background: rgba(33, 150, 243, 0.15);
+    .card-actions {
+        background: rgba(0, 0, 0, 0.1);
+        border-color: rgba(255, 255, 255, 0.1);
     }
     
-    .status-encerrada {
-        background: linear-gradient(135deg, rgba(244, 67, 54, 0.8) 0%, rgba(211, 47, 47, 0.8) 100%);
+    .availability-section {
+        background: rgba(76, 175, 80, 0.1);
+        border-color: rgba(76, 175, 80, 0.3);
+    }
+    
+    .deadline-section {
+        background: rgba(33, 150, 243, 0.1);
+        border-color: rgba(33, 150, 243, 0.3);
+    }
+}
+
+/* Melhorias para Alto Contraste */
+@media (prefers-contrast: high) {
+    .result-card {
+        border-width: 2px;
+    }
+    
+    .availability-section,
+    .deadline-section,
+    .status-banner {
+        border-width: 2px;
+    }
+    
+    .card-title,
+    .availability-label,
+    .deadline-label {
+        font-weight: 700;
     }
 }
 
 /* Animações de Entrada Escalonadas */
-.result-card .status-banner {
+.result-card .card-header {
     animation-delay: 0.1s;
 }
 
-.result-card .vagas-info {
+.result-card .availability-section {
     animation-delay: 0.2s;
 }
 
-.result-card .prazo-inscricao {
+.result-card .deadline-section {
     animation-delay: 0.3s;
 }
 
-/* Efeitos de Micro-interação */
-.vagas-barra:hover .vagas-progresso {
-    transform: scaleY(1.2);
+.result-card .card-actions {
+    animation-delay: 0.4s;
+}
+
+/* Micro-interações */
+.availability-bar:hover .availability-progress {
+    transform: scaleY(1.1);
     transition: transform 0.2s ease-out;
 }
 
-.prazo-restante:hover {
+.deadline-remaining:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease-out;
+}
+
+.status-badge:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease-out;
 }
